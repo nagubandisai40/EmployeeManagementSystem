@@ -1,0 +1,32 @@
+version: "3.2"
+services:
+  tomcat:
+    image: tomcat:7.0.62-jre8
+    hostname: "TomcatContainer"
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql
+    volumes:
+      - "C:\\learnings\\simplilearn_java_project\\EmployeeManagementSystem\\target:/usr/local/tomcat/webapps"
+    networks:
+      - ems
+  mysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    hostname: "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "emsdb"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "C:\\learnings\\simplilearn_java_project\\emsdb_data:/var/lib/mysql"
+    networks:
+      - ems
+
+networks:
+  ems:
+    driver: overlay
+    attachable: true

@@ -1,0 +1,1 @@
+docker stack rm ems && mvn clean install && docker stack deploy -c ./docker-compose.yaml ems
