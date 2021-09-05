@@ -37,4 +37,15 @@ public class DepartmentDao {
 		return  departments;
 	}
 
+	public Department getDepartment(int deptId) {
+		Department department = null;
+		try{
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			department = session.get(Department.class,deptId);
+			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return department;
+	}
 }
